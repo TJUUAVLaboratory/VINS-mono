@@ -1,0 +1,24 @@
+<launch>
+    <!-- Euroc -->
+    <arg name="rosbag_file"      default = "/home/hualong/ssd/datasets/SLAM/EuRoC/MH_01_easy.bag" />
+    <arg name="config_path" default = "$(find feature_tracker)/../config/euroc/euroc_config.yaml" />
+
+    <!-- TUM -->
+    <!-- <arg name="rosbag_file"      default = "/home/hualong/ssd/datasets/SLAM/TUM-dataset/rgbd_dataset_freiburg3_long_office_household.bag" />
+    <arg name="config_path" default = "$(find feature_tracker)/../config/tum/tum_config.yaml" />     -->
+    <arg name="vins_path" default = "$(find feature_tracker)/../config/../" />
+    
+    <!-- <remap from="/cam0/image_raw" to="/camera/left/image_raw" /> 
+	<remap from="/cam1/image_raw" to="/camera/right/image_raw" />  -->
+    <node pkg="rosbag" type="play" name="play" args="--pause $(arg rosbag_file)" output="screen" 
+    />
+
+    <!-- rviz -->
+    <node name="rvizvisualisation" pkg="rviz" type="rviz" output="log" args="-d $(find feature_tracker)/../config/feature_tracker.rviz" />
+
+    <node name="vins_mono_feature_tracker" pkg="feature_tracker" type="feature_tracker" output="screen" >
+        <param name="config_file" type="string" value="$(arg config_path)" />
+        <param name="vins_folder" type="string" value="$(arg vins_path)" />
+    </node>
+
+</launch>

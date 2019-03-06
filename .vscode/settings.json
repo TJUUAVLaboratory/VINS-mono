@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "cstdio": "cpp",
+        "iostream": "cpp",
+        "queue": "cpp",
+        "dense": "cpp",
+        "condition_variable": "cpp"
+    },
+    "C_Cpp.intelliSenseEngineFallback": "Disabled"
+}
